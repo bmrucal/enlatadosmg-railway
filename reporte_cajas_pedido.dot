@@ -1,0 +1,9 @@
+digraph G {
+rankdir=LR;
+node [shape=box];
+caja1 [label="Caja: 1\nFecha: 25/05/2026"];
+caja1 -> caja2;
+caja2 [label="Caja: 2\nFecha: 25/05/2026"];
+caja2 -> caja3;
+caja3 [label="Caja: 3\nFecha: 25/05/2026"];
+}

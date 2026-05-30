@@ -1,0 +1,15 @@
+digraph G {
+rankdir=LR;
+node [shape=box];
+usuario1 [label="ID: 1\nNombre: Brayan"];
+usuario1 -> usuario2;
+usuario2 [label="ID: 2\nNombre: Carlos"];
+usuario2 -> usuario3;
+usuario3 [label="ID: 3\nNombre: Maria"];
+usuario3 -> usuario1;
+usuario1 [label="ID: 1\nNombre: Brayan"];
+usuario1 -> usuario2;
+usuario2 [label="ID: 2\nNombre: Carlos"];
+usuario2 -> usuario3;
+usuario3 [label="ID: 3\nNombre: Maria"];
+}

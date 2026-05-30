@@ -1,0 +1,6 @@
+digraph G {
+node [shape=box];
+cliente100 [label="CUI: 100\nNombre: Luis\nAltura: 2"];
+cliente100 -> cliente120;
+cliente120 [label="CUI: 120\nNombre: Juan\nAltura: 1"];
+}
