@@ -7,6 +7,9 @@ public class Vehiculo {
     private String modelo;
     private String color;
     private int anio;
+    
+    public Vehiculo() {
+    }
 
     public Vehiculo(
             String placa,

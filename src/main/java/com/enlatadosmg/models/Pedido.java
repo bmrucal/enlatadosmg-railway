@@ -20,6 +20,10 @@ public class Pedido {
     
     private ListaCajasPedido cajas;
 
+    public Pedido() {
+        this.cajas = new ListaCajasPedido();
+    }
+    
     public Pedido(
             int numeroPedido,
             String origen,
