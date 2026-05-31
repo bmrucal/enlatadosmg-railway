@@ -2,25 +2,28 @@ package com.enlatadosmg.models;
 
 public class Repartidor {
 
-    private long cui;
+    private String cui;
     private String nombre;
-    private String apellido;
+    private String apellidos;
     private String licencia;
     private String telefono;
 
-    public Repartidor(long cui, String nombre, String apellido, String licencia, String telefono) {
+    public Repartidor() {
+    }
+
+    public Repartidor(String cui, String nombre, String apellidos, String licencia, String telefono) {
         this.cui = cui;
         this.nombre = nombre;
-        this.apellido = apellido;
+        this.apellidos = apellidos;
         this.licencia = licencia;
         this.telefono = telefono;
     }
 
-    public long getCui() {
+    public String getCui() {
         return cui;
     }
 
-    public void setCui(long cui) {
+    public void setCui(String cui) {
         this.cui = cui;
     }
 
@@ -32,12 +35,12 @@ public class Repartidor {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public String getLicencia() {

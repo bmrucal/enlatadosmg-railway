@@ -22,7 +22,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "/clientes/**",
                         "/reportes/**",
                         "/vehiculos/**",
-                        "/pedidos/**"
+                        "/pedidos/**",
+                        "/repartidores/**"
                 )
                 .excludePathPatterns(
                         "/usuarios/cargar-csv"

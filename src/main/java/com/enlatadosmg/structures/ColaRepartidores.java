@@ -17,7 +17,7 @@ public class ColaRepartidores {
 
         NodoRepartidor nuevo = new NodoRepartidor(repartidor);
 
-        if (fin == null) {
+        if (frente == null) {
             frente = nuevo;
             fin = nuevo;
             return;
@@ -34,7 +34,6 @@ public class ColaRepartidores {
         }
 
         Repartidor repartidor = frente.repartidor;
-
         frente = frente.siguiente;
 
         if (frente == null) {
@@ -53,10 +52,85 @@ public class ColaRepartidores {
         return frente.repartidor;
     }
 
+    public Repartidor buscar(String cui) {
+
+        NodoRepartidor actual = frente;
+
+        while (actual != null) {
+
+            if (actual.repartidor.getCui().equals(cui)) {
+                return actual.repartidor;
+            }
+
+            actual = actual.siguiente;
+        }
+
+        return null;
+    }
+
+    public boolean actualizar(String cui, Repartidor nuevoRepartidor) {
+
+        NodoRepartidor actual = frente;
+
+        while (actual != null) {
+
+            if (actual.repartidor.getCui().equals(cui)) {
+                actual.repartidor.setNombre(nuevoRepartidor.getNombre());
+                actual.repartidor.setApellidos(nuevoRepartidor.getApellidos());
+                actual.repartidor.setLicencia(nuevoRepartidor.getLicencia());
+                actual.repartidor.setTelefono(nuevoRepartidor.getTelefono());
+                return true;
+            }
+
+            actual = actual.siguiente;
+        }
+
+        return false;
+    }
+
+    public boolean eliminar(String cui) {
+
+        if (frente == null) {
+            return false;
+        }
+
+        if (frente.repartidor.getCui().equals(cui)) {
+            frente = frente.siguiente;
+
+            if (frente == null) {
+                fin = null;
+            }
+
+            return true;
+        }
+
+        NodoRepartidor actual = frente;
+
+        while (actual.siguiente != null) {
+
+            if (actual.siguiente.repartidor.getCui().equals(cui)) {
+
+                if (actual.siguiente == fin) {
+                    fin = actual;
+                }
+
+                actual.siguiente = actual.siguiente.siguiente;
+                return true;
+            }
+
+            actual = actual.siguiente;
+        }
+
+        return false;
+    }
+
     public String listarRepartidores() {
 
-        String resultado = "";
+        if (frente == null) {
+            return "";
+        }
 
+        String resultado = "";
         NodoRepartidor actual = frente;
 
         while (actual != null) {
@@ -65,6 +139,12 @@ public class ColaRepartidores {
                     + actual.repartidor.getCui()
                     + " Nombre: "
                     + actual.repartidor.getNombre()
+                    + " "
+                    + actual.repartidor.getApellidos()
+                    + " Licencia: "
+                    + actual.repartidor.getLicencia()
+                    + " Teléfono: "
+                    + actual.repartidor.getTelefono()
                     + "\n";
 
             actual = actual.siguiente;

@@ -4,115 +4,99 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.enlatadosmg.models.Cliente;
 import com.enlatadosmg.models.Pedido;
-import com.enlatadosmg.models.Repartidor;
-import com.enlatadosmg.models.Vehiculo;
 
 public class ColaPedidosTest {
 
     @Test
-    public void testEncolarYDesencolar() {
-
+    public void testEncolarYVerFrente() {
         ColaPedidos cola = new ColaPedidos();
 
-        Cliente cliente = new Cliente(
-                123L,
-                "Brayan",
-                "Rucal",
-                "5555-5555",
-                "Guatemala"
-        );
-        Repartidor repartidor = new Repartidor(
-                456L,
-                "Carlos",
-                "Lopez",
-                "A",
-                "4444-4444"
-        );
-
-        Vehiculo vehiculo = new Vehiculo(
-                "P123ABC",
-                "Toyota",
-                "Hilux",
-                "Rojo",
-                2020
-        );
-
-        Pedido pedido1 = new Pedido(
-                1,
+        Pedido p1 = new Pedido(
+                101,
                 "Guatemala",
                 "Escuintla",
-                "25/05/2026 10:00",
+                "2026-05-30 10:00",
                 "Pendiente",
-                cliente,
-                repartidor,
-                vehiculo
+                null,
+                null,
+                null
         );
 
-        Pedido pedido2 = new Pedido(
-                2,
+        Pedido p2 = new Pedido(
+                102,
                 "Guatemala",
-                "Petén",
-                "25/05/2026 11:00",
+                "Quetzaltenango",
+                "2026-05-30 11:00",
                 "Pendiente",
-                cliente,
-                repartidor,
-                vehiculo
+                null,
+                null,
+                null
         );
 
-        cola.encolar(pedido1);
-        cola.encolar(pedido2);
-
-        Pedido primero = cola.desencolar();
-
-        assertEquals(1, primero.getNumeroPedido());
-    }
-
-    @Test
-    public void testVerFrente() {
-
-        ColaPedidos cola = new ColaPedidos();
-
-        Cliente cliente = new Cliente(
-                123L,
-                "Brayan",
-                "Rucal",
-                "5555-5555",
-                "Guatemala"
-        );
-
-        Repartidor repartidor = new Repartidor(
-                456L,
-                "Carlos",
-                "Lopez",
-                "A",
-                "4444-4444"
-        );
-
-        Vehiculo vehiculo = new Vehiculo(
-                "P123ABC",
-                "Toyota",
-                "Hilux",
-                "Rojo",
-                2020
-        );
-
-        Pedido pedido1 = new Pedido(
-                1,
-                "Guatemala",
-                "Escuintla",
-                "25/05/2026 10:00",
-                "Pendiente",
-                cliente,
-                repartidor,
-                vehiculo
-        );
-
-        cola.encolar(pedido1);
+        cola.encolar(p1);
+        cola.encolar(p2);
 
         Pedido frente = cola.verFrente();
 
-        assertEquals(1, frente.getNumeroPedido());
+        assertNotNull(frente);
+        assertEquals(101, frente.getNumeroPedido());
+        assertEquals("Escuintla", frente.getDestino());
+        assertEquals("Pendiente", frente.getEstado());
+    }
+
+    @Test
+    public void testDesencolarFIFO() {
+        ColaPedidos cola = new ColaPedidos();
+
+        Pedido p1 = new Pedido(
+                101,
+                "Guatemala",
+                "Escuintla",
+                "2026-05-30 10:00",
+                "Pendiente",
+                null,
+                null,
+                null
+        );
+
+        Pedido p2 = new Pedido(
+                102,
+                "Guatemala",
+                "Quetzaltenango",
+                "2026-05-30 11:00",
+                "Pendiente",
+                null,
+                null,
+                null
+        );
+
+        cola.encolar(p1);
+        cola.encolar(p2);
+
+        Pedido primero = cola.desencolar();
+        Pedido segundo = cola.desencolar();
+
+        assertNotNull(primero);
+        assertNotNull(segundo);
+
+        assertEquals(101, primero.getNumeroPedido());
+        assertEquals(102, segundo.getNumeroPedido());
+
+        assertNull(cola.desencolar());
+    }
+
+    @Test
+    public void testVerFrenteColaVacia() {
+        ColaPedidos cola = new ColaPedidos();
+
+        assertNull(cola.verFrente());
+    }
+
+    @Test
+    public void testDesencolarColaVacia() {
+        ColaPedidos cola = new ColaPedidos();
+
+        assertNull(cola.desencolar());
     }
 }
