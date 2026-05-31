@@ -152,4 +152,45 @@ public class ColaRepartidores {
 
         return resultado;
     }
+    public String generarDot() {
+
+        StringBuilder dot = new StringBuilder();
+
+        dot.append("digraph G {\n");
+        dot.append("node [shape=box];\n");
+        dot.append("rankdir=LR;\n");
+
+        NodoRepartidor actual = frente;
+
+        while (actual != null) {
+
+            dot.append("repartidor")
+                    .append(actual.repartidor.getCui())
+                    .append(" [label=\"CUI: ")
+                    .append(actual.repartidor.getCui())
+                    .append("\\nNombre: ")
+                    .append(actual.repartidor.getNombre())
+                    .append(" ")
+                    .append(actual.repartidor.getApellidos())
+                    .append("\\nLicencia: ")
+                    .append(actual.repartidor.getLicencia())
+                    .append("\\nTeléfono: ")
+                    .append(actual.repartidor.getTelefono())
+                    .append("\"];\n");
+
+            if (actual.siguiente != null) {
+                dot.append("repartidor")
+                        .append(actual.repartidor.getCui())
+                        .append(" -> repartidor")
+                        .append(actual.siguiente.repartidor.getCui())
+                        .append(";\n");
+            }
+
+            actual = actual.siguiente;
+        }
+
+        dot.append("}");
+
+        return dot.toString();
+    }
 }

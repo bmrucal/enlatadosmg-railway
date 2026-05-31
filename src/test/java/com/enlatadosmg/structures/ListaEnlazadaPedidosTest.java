@@ -81,6 +81,8 @@ public class ListaEnlazadaPedidosTest {
                 null
         );
 
+        p1.setNumeroCajas(2);
+
         Pedido p2 = new Pedido(
                 102,
                 "Guatemala",
@@ -92,6 +94,8 @@ public class ListaEnlazadaPedidosTest {
                 null
         );
 
+        p2.setNumeroCajas(3);
+
         lista.insertar(p1);
         lista.insertar(p2);
 
@@ -102,6 +106,7 @@ public class ListaEnlazadaPedidosTest {
         assertTrue(listado.contains("Pendiente"));
         assertTrue(listado.contains("Escuintla"));
         assertTrue(listado.contains("Quetzaltenango"));
+        assertTrue(listado.contains("Cajas"));
     }
 
     @Test
@@ -136,5 +141,29 @@ public class ListaEnlazadaPedidosTest {
         boolean completado = lista.completarPedido(999);
 
         assertFalse(completado);
+    }
+
+    @Test
+    public void testGenerarDotPedidos() {
+        ListaEnlazadaPedidos lista = new ListaEnlazadaPedidos();
+
+        Pedido p1 = new Pedido(
+                101,
+                "Guatemala",
+                "Escuintla",
+                "2026-05-30 10:00",
+                "Pendiente",
+                null,
+                null,
+                null
+        );
+
+        lista.insertar(p1);
+
+        String dot = lista.generarDot();
+
+        assertTrue(dot.contains("digraph G"));
+        assertTrue(dot.contains("pedido101"));
+        assertTrue(dot.contains("Pendiente"));
     }
 }

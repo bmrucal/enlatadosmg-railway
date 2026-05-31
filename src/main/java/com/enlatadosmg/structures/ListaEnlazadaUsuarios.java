@@ -115,7 +115,7 @@ public class ListaEnlazadaUsuarios {
         return false;
     }
  // GENERAR DOT PARA GRAPHVIZ
-    public String generarDot() {
+    public String generardot() {
 
         StringBuilder dot = new StringBuilder();
 
@@ -141,6 +141,44 @@ public class ListaEnlazadaUsuarios {
                    .append(" -> usuario")
                    .append(actual.siguiente.usuario.getId())
                    .append(";\n");
+            }
+
+            actual = actual.siguiente;
+        }
+
+        dot.append("}");
+
+        return dot.toString();
+    }
+    
+    public String generarDot() {
+
+        StringBuilder dot = new StringBuilder();
+
+        dot.append("digraph G {\n");
+        dot.append("node [shape=box];\n");
+        dot.append("rankdir=LR;\n");
+
+        NodoUsuario actual = cabeza;
+
+        while (actual != null) {
+
+            dot.append("usuario")
+                    .append(actual.usuario.getId())
+                    .append(" [label=\"ID: ")
+                    .append(actual.usuario.getId())
+                    .append("\\nNombre: ")
+                    .append(actual.usuario.getNombre())
+                    .append("\\nApellido: ")
+                    .append(actual.usuario.getApellido())
+                    .append("\"];\n");
+
+            if (actual.siguiente != null) {
+                dot.append("usuario")
+                        .append(actual.usuario.getId())
+                        .append(" -> usuario")
+                        .append(actual.siguiente.usuario.getId())
+                        .append(";\n");
             }
 
             actual = actual.siguiente;

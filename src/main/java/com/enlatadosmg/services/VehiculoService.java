@@ -18,15 +18,30 @@ public class VehiculoService {
         colaVehiculos.encolar(vehiculo);
     }
 
-    public Vehiculo sacarVehiculo() {
-        return colaVehiculos.desencolar();
+    public String listarVehiculos() {
+        return colaVehiculos.listarVehiculos();
+    }
+
+    public Vehiculo buscarVehiculo(String placa) {
+        return colaVehiculos.buscar(placa);
+    }
+
+    public boolean actualizarVehiculo(String placa, Vehiculo vehiculo) {
+        return colaVehiculos.actualizar(placa, vehiculo);
+    }
+
+    public boolean eliminarVehiculo(String placa) {
+        return colaVehiculos.eliminar(placa);
+    }
+    public String generarDotVehiculos() {
+        return colaVehiculos.generarDot();
     }
 
     public Vehiculo verSiguiente() {
         return colaVehiculos.verFrente();
     }
 
-    public String listarVehiculos() {
-        return colaVehiculos.listarVehiculos();
+    public Vehiculo sacarVehiculo() {
+        return colaVehiculos.desencolar();
     }
 }

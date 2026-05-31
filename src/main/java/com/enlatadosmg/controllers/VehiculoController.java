@@ -19,17 +19,47 @@ public class VehiculoController {
         return "Vehiculo agregado correctamente";
     }
 
-    @GetMapping("/siguiente")
-    public Vehiculo verSiguiente() {
-        return vehiculoService.verSiguiente();
-    }
-
     @GetMapping
     public String listarVehiculos() {
         return vehiculoService.listarVehiculos();
     }
 
-    @DeleteMapping
+    @GetMapping("/{placa}")
+    public Vehiculo buscarVehiculo(@PathVariable String placa) {
+        return vehiculoService.buscarVehiculo(placa);
+    }
+
+    @PutMapping("/{placa}")
+    public String actualizarVehiculo(
+            @PathVariable String placa,
+            @RequestBody Vehiculo vehiculo) {
+
+        boolean actualizado = vehiculoService.actualizarVehiculo(placa, vehiculo);
+
+        if (actualizado) {
+            return "Vehiculo actualizado correctamente";
+        }
+
+        return "Vehiculo no encontrado";
+    }
+
+    @DeleteMapping("/{placa}")
+    public String eliminarVehiculo(@PathVariable String placa) {
+        boolean eliminado = vehiculoService.eliminarVehiculo(placa);
+
+        if (eliminado) {
+            return "Vehiculo eliminado correctamente";
+        }
+
+        return "Vehiculo no encontrado";
+    }
+
+    @GetMapping("/siguiente")
+    public Vehiculo verSiguiente() {
+        return vehiculoService.verSiguiente();
+    }
+
+    @DeleteMapping("/siguiente")
     public Vehiculo sacarVehiculo() {
         return vehiculoService.sacarVehiculo();
     }

@@ -15,21 +15,37 @@ public class PilaCajasController {
 
     @PostMapping
     public String agregarCaja(@RequestBody Caja caja) {
-
         pilaCajasService.agregarCaja(caja);
-
         return "Caja agregada correctamente";
+    }
+
+    @PostMapping("/automatica")
+    public Caja agregarCajaAutomatica() {
+        return pilaCajasService.agregarCajaAutomatica();
+    }
+
+    @PostMapping("/generar/{cantidad}")
+    public String generarCajas(@PathVariable int cantidad) {
+        return pilaCajasService.generarCajas(cantidad);
+    }
+
+    @GetMapping
+    public String listarCajas() {
+        return pilaCajasService.listarCajas();
     }
 
     @GetMapping("/cima")
     public Caja verCima() {
-
         return pilaCajasService.verCima();
+    }
+
+    @GetMapping("/cantidad")
+    public int contarCajas() {
+        return pilaCajasService.contarCajas();
     }
 
     @DeleteMapping
     public Caja sacarCaja() {
-
         return pilaCajasService.sacarCaja();
     }
 }

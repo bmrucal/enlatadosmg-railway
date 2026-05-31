@@ -12,7 +12,6 @@ public class ListaCajasPedido {
     }
 
     public void insertar(Caja caja) {
-
         NodoCaja nuevo = new NodoCaja(caja);
 
         if (cabeza == null) {
@@ -29,10 +28,24 @@ public class ListaCajasPedido {
         actual.siguiente = nuevo;
     }
 
-    public int contarCajas() {
-
+    public Caja buscarPorPosicion(int posicion) {
+        NodoCaja actual = cabeza;
         int contador = 0;
 
+        while (actual != null) {
+            if (contador == posicion) {
+                return actual.caja;
+            }
+
+            actual = actual.siguiente;
+            contador++;
+        }
+
+        return null;
+    }
+
+    public int contarCajas() {
+        int contador = 0;
         NodoCaja actual = cabeza;
 
         while (actual != null) {
@@ -44,16 +57,17 @@ public class ListaCajasPedido {
     }
 
     public String listarCajas() {
+        if (cabeza == null) {
+            return "";
+        }
 
         String resultado = "";
-
         NodoCaja actual = cabeza;
 
         while (actual != null) {
-
             resultado += "Caja: "
                     + actual.caja.getCorrelativo()
-                    + " Fecha: "
+                    + " Fecha ingreso: "
                     + actual.caja.getFechaIngreso()
                     + "\n";
 
@@ -61,40 +75,5 @@ public class ListaCajasPedido {
         }
 
         return resultado;
-    }
-    public String generarDot() {
-
-        StringBuilder dot = new StringBuilder();
-
-        dot.append("digraph G {\n");
-        dot.append("rankdir=LR;\n");
-        dot.append("node [shape=box];\n");
-
-        NodoCaja actual = cabeza;
-
-        while (actual != null) {
-
-            dot.append("caja")
-               .append(actual.caja.getCorrelativo())
-               .append(" [label=\"Caja: ")
-               .append(actual.caja.getCorrelativo())
-               .append("\\nFecha: ")
-               .append(actual.caja.getFechaIngreso())
-               .append("\"];\n");
-
-            if (actual.siguiente != null) {
-                dot.append("caja")
-                   .append(actual.caja.getCorrelativo())
-                   .append(" -> caja")
-                   .append(actual.siguiente.caja.getCorrelativo())
-                   .append(";\n");
-            }
-
-            actual = actual.siguiente;
-        }
-
-        dot.append("}");
-
-        return dot.toString();
     }
 }

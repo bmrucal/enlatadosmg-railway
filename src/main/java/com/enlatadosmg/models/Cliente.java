@@ -3,14 +3,13 @@ package com.enlatadosmg.models;
 public class Cliente {
 
     private long cui;
-
     private String nombre;
-
     private String apellido;
-
     private String telefono;
-
     private String direccion;
+
+    public Cliente() {
+    }
 
     public Cliente(
             long cui,
@@ -65,4 +64,4 @@ public class Cliente {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-}	
+}

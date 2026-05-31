@@ -7,17 +7,11 @@ public class Vehiculo {
     private String modelo;
     private String color;
     private int anio;
-    
+
     public Vehiculo() {
     }
 
-    public Vehiculo(
-            String placa,
-            String marca,
-            String modelo,
-            String color,
-            int anio) {
-
+    public Vehiculo(String placa, String marca, String modelo, String color, int anio) {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;

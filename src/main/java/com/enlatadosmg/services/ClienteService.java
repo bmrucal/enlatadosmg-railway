@@ -21,9 +21,19 @@ public class ClienteService {
     public Cliente buscarCliente(long cui) {
         return arbolClientes.buscar(cui);
     }
+
     public String listarClientes() {
         return arbolClientes.listarInOrden();
     }
+
+    public boolean actualizarCliente(long cui, Cliente cliente) {
+        return arbolClientes.actualizar(cui, cliente);
+    }
+
+    public boolean eliminarCliente(long cui) {
+        return arbolClientes.eliminar(cui);
+    }
+
     public String generarDotClientes() {
         return arbolClientes.generarDot();
     }

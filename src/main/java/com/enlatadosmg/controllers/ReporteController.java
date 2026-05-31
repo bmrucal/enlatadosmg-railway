@@ -1,63 +1,95 @@
 package com.enlatadosmg.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.enlatadosmg.reports.ReporteUsuarios;
-import com.enlatadosmg.services.UsuarioService;
-import com.enlatadosmg.models.Caja;
-import com.enlatadosmg.reports.ReporteCajasPedido;
-import com.enlatadosmg.structures.ListaCajasPedido;
-import com.enlatadosmg.reports.ReporteClientes;
 import com.enlatadosmg.services.ClienteService;
+import com.enlatadosmg.services.PedidoService;
+import com.enlatadosmg.services.PilaCajasService;
+import com.enlatadosmg.services.RepartidorService;
+import com.enlatadosmg.services.UsuarioService;
+import com.enlatadosmg.services.VehiculoService;
 
 @RestController
+@RequestMapping("/reportes")
 public class ReporteController {
-	
-	@Autowired
-	private ClienteService clienteService;
 
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/reportes/usuarios")
-    public String generarReporteUsuarios() {
+    @Autowired
+    private PilaCajasService pilaCajasService;
 
-        String dot = usuarioService.generarDotUsuarios();
+    @Autowired
+    private ClienteService clienteService;
 
-        ReporteUsuarios reporte = new ReporteUsuarios();
+    @Autowired
+    private RepartidorService repartidorService;
 
-        reporte.generarReporte(dot);
+    @Autowired
+    private VehiculoService vehiculoService;
 
-        return "Reporte dinamico de usuarios generado correctamente";
+    @Autowired
+    private PedidoService pedidoService;
+
+    @GetMapping("/usuarios")
+    public String reporteUsuarios() {
+        return usuarioService.generarDotUsuarios();
     }
-    @GetMapping("/reportes/cajas-pedido")
-    public String generarReporteCajasPedido() {
 
-        ListaCajasPedido lista = new ListaCajasPedido();
-
-        lista.insertar(new Caja(1, "25/05/2026"));
-        lista.insertar(new Caja(2, "25/05/2026"));
-        lista.insertar(new Caja(3, "25/05/2026"));
-
-        String dot = lista.generarDot();
-
-        ReporteCajasPedido reporte = new ReporteCajasPedido();
-
-        reporte.generarReporte(dot);
-
-        return "Reporte de cajas por pedido generado correctamente";
+    @GetMapping("/cajas")
+    public String reporteCajas() {
+        return pilaCajasService.generarDotCajas();
     }
-    @GetMapping("/reportes/clientes")
-    public String generarReporteClientes() {
 
-        String dot = clienteService.generarDotClientes();
+    @GetMapping("/clientes")
+    public String reporteClientes() {
+        return clienteService.generarDotClientes();
+    }
 
-        ReporteClientes reporte = new ReporteClientes();
+    @GetMapping("/repartidores")
+    public String reporteRepartidores() {
+        return repartidorService.generarDotRepartidores();
+    }
 
-        reporte.generarReporte(dot);
+    @GetMapping("/vehiculos")
+    public String reporteVehiculos() {
+        return vehiculoService.generarDotVehiculos();
+    }
 
-        return "Reporte de clientes generado correctamente";
+    @GetMapping("/pedidos")
+    public String reportePedidos() {
+        return pedidoService.generarDotPedidos();
+    }
+
+    @GetMapping("/todos")
+    public String reporteTodos() {
+
+        StringBuilder reportes = new StringBuilder();
+
+        reportes.append("===== REPORTE USUARIOS =====\n");
+        reportes.append(usuarioService.generarDotUsuarios());
+        reportes.append("\n\n");
+
+        reportes.append("===== REPORTE CAJAS =====\n");
+        reportes.append(pilaCajasService.generarDotCajas());
+        reportes.append("\n\n");
+
+        reportes.append("===== REPORTE CLIENTES =====\n");
+        reportes.append(clienteService.generarDotClientes());
+        reportes.append("\n\n");
+
+        reportes.append("===== REPORTE REPARTIDORES =====\n");
+        reportes.append(repartidorService.generarDotRepartidores());
+        reportes.append("\n\n");
+
+        reportes.append("===== REPORTE VEHICULOS =====\n");
+        reportes.append(vehiculoService.generarDotVehiculos());
+        reportes.append("\n\n");
+
+        reportes.append("===== REPORTE PEDIDOS =====\n");
+        reportes.append(pedidoService.generarDotPedidos());
+
+        return reportes.toString();
     }
 }

@@ -33,6 +33,10 @@ public class RepartidorService {
     public boolean eliminarRepartidor(String cui) {
         return colaRepartidores.eliminar(cui);
     }
+    
+    public String generarDotRepartidores() {
+        return colaRepartidores.generarDot();
+    }
 
     public Repartidor verSiguiente() {
         return colaRepartidores.verFrente();

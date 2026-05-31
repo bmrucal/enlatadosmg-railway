@@ -5,10 +5,10 @@ public class Caja {
     private int correlativo;
     private String fechaIngreso;
 
-    public Caja(
-            int correlativo,
-            String fechaIngreso) {
+    public Caja() {
+    }
 
+    public Caja(int correlativo, String fechaIngreso) {
         this.correlativo = correlativo;
         this.fechaIngreso = fechaIngreso;
     }

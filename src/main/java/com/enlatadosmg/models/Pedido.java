@@ -1,29 +1,26 @@
 package com.enlatadosmg.models;
+
 import com.enlatadosmg.structures.ListaCajasPedido;
+
 public class Pedido {
 
     private int numeroPedido;
-
     private String origen;
-
     private String destino;
-
     private String fechaHora;
-
     private String estado;
-
     private Cliente cliente;
-
     private Repartidor repartidor;
-
     private Vehiculo vehiculo;
-    
     private ListaCajasPedido cajas;
+    private int numeroCajas;
 
     public Pedido() {
+        this.estado = "Pendiente";
         this.cajas = new ListaCajasPedido();
+        this.numeroCajas = 0;
     }
-    
+
     public Pedido(
             int numeroPedido,
             String origen,
@@ -43,6 +40,7 @@ public class Pedido {
         this.repartidor = repartidor;
         this.vehiculo = vehiculo;
         this.cajas = new ListaCajasPedido();
+        this.numeroCajas = 0;
     }
 
     public int getNumeroPedido() {
@@ -108,12 +106,20 @@ public class Pedido {
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
-    
+
     public ListaCajasPedido getCajas() {
         return cajas;
     }
 
     public void setCajas(ListaCajasPedido cajas) {
         this.cajas = cajas;
+    }
+
+    public int getNumeroCajas() {
+        return numeroCajas;
+    }
+
+    public void setNumeroCajas(int numeroCajas) {
+        this.numeroCajas = numeroCajas;
     }
 }
